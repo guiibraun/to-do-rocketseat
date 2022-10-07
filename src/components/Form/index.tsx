@@ -11,6 +11,7 @@ export const Form = ({onAddTask}: TaskProps) => {
     const handleAddTask = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         onAddTask(addTask)
+        setAddTask('')
     }
 
     const handleTaskChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,6 +24,7 @@ export const Form = ({onAddTask}: TaskProps) => {
                 <input 
                     type="text"
                     required
+                    value={addTask}
                     onChange={handleTaskChange}
                     placeholder="Adicione uma nova tarefa" 
                     name="task" 

@@ -6,7 +6,9 @@ import { TaskArea } from './components/TaskArea'
 import {v4 as uuid} from 'uuid'
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>([])
+  const [tasks, setTasks] = useState<Task[]>([{
+    id: uuid(), title:'TITULO LEGAL', checked: true
+  }])
 
   const addTask = (addNewTask: string) => {
     setTasks([...tasks, {

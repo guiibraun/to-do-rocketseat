@@ -10,16 +10,17 @@ interface TaskProps {
 
 export const TaskArea = ({ tasks, deleteTaskApp }: TaskProps) => {
     const [completedTasks, setCompletedTasks] = useState(0)
-    const [createdTasks, setCreatedTasks] = useState(tasks.length)
+    const [createdTasks, setCreatedTasks] = useState(0)
 
     useEffect(() => {
-        setCreatedTasks(tasks.length)
+        let newCreatedTasks = tasks.length
+        setCreatedTasks(newCreatedTasks)
     }, [tasks])
 
     useEffect(() => {
         let newTasks = [...tasks].filter(item => item.checked == true)
         setCompletedTasks(newTasks.length)   
-    }, [])
+    }, []) // Verifica se existe alguma tarefa na memoria que já está concluida e sinaliza ela como concluida ao carregar
 
     const onDeleteTask = (id: string, checked: boolean) => {
         let tasksWhithOutDeletedTask = tasks.filter(item => item.id != id)
