@@ -6,12 +6,7 @@ import { TaskArea } from './components/TaskArea'
 import {v4 as uuid} from 'uuid'
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>([
-    {id: uuid(), title: "Esse irure nisi excepteur ex non fugiat elit consequat ea qui cillum amet.", checked: true},
-    {id: uuid(), title: "Esse irure nisi excepteur ex non fugiat elit consequat ea qui cillum amet.", checked: true},
-    {id: uuid(), title: "Esse irure nisi excepteur ex non fugiat elit consequat ea qui cillum amet.", checked: false},
-
-  ])
+  const [tasks, setTasks] = useState<Task[]>([])
 
   const addTask = (addNewTask: string) => {
     setTasks([...tasks, {
@@ -25,12 +20,13 @@ function App() {
     setTasks(taskDeleted)
   }
 
+
   return (
     <div className="bg-gray-600 min-h-screen">
       <Header />
       <div className="max-w-3xl mx-auto -m-8">
         <Form onAddTask={addTask} />
-        <TaskArea tasks={tasks} deleteTaskApp={deleteTask}/>
+        <TaskArea tasks={tasks} deleteTaskApp={deleteTask} />
       </div>
     </div>
 

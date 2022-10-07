@@ -23,6 +23,7 @@ export const Form = ({onAddTask}: TaskProps) => {
             <form className='flex gap-2' onSubmit={handleAddTask}>
                 <input 
                     type="text"
+                    required
                     onChange={handleTaskChange}
                     placeholder="Adicione uma nova tarefa" 
                     name="task" 
