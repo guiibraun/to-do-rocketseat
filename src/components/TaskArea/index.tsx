@@ -16,7 +16,6 @@ export const TaskArea = ({ tasks, deleteTaskApp }: TaskProps) => {
         setCreatedTasks(tasks.length)
     }, [tasks])
 
-
     useEffect(() => {
         let completedTasksData = tasks.filter(item => item.checked == true)
         setCompletedTasks(completedTasksData.length) 
@@ -29,10 +28,7 @@ export const TaskArea = ({ tasks, deleteTaskApp }: TaskProps) => {
     }
     
     const onCompletedTask = (completed: boolean) => {
-        let newCompletedTasks = completedTasks
-        if(completed){
-            setCompletedTasks(newCompletedTasks+1)
-        } 
+        console.log(completed)
     }
 
     return (
