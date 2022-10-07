@@ -13,9 +13,15 @@ export const TaskArea = ({ tasks, deleteTaskApp }: TaskProps) => {
     const [createdTasks, setCreatedTasks] = useState(tasks.length)
 
     useEffect(() => {
-        tasksCompleted()
+        setCreatedTasks(tasks.length)
+    }, [tasks])
+
+
+    useEffect(() => {
+        let completedTasksData = tasks.filter(item => item.checked == true)
+        setCompletedTasks(completedTasksData.length) 
     }, [])
-    
+
     const onDeleteTask = (id: string) => {
         let tasksWhithOutDeletedTask = tasks.filter(item =>  item.id != id)
         deleteTaskApp(tasksWhithOutDeletedTask)
@@ -26,14 +32,7 @@ export const TaskArea = ({ tasks, deleteTaskApp }: TaskProps) => {
         let newCompletedTasks = completedTasks
         if(completed){
             setCompletedTasks(newCompletedTasks+1)
-        } else {
-            completedTasks < 1 ? setCompletedTasks(0) : setCompletedTasks(newCompletedTasks - 1)
-        }  
-    }
-
-    const tasksCompleted = () => {
-        let newCompletedTasks = tasks.filter(item => item.checked == true)
-        setCompletedTasks(newCompletedTasks.length)
+        } 
     }
 
     return (

@@ -1,6 +1,6 @@
 import { Form } from "./components/Form"
 import { Header } from "./components/Header"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Task } from "./types/Tasks"
 import { TaskArea } from './components/TaskArea'
 import {v4 as uuid} from 'uuid'

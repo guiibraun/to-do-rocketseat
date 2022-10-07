@@ -9,8 +9,6 @@ interface TaskProps {
 export const Form = ({onAddTask}: TaskProps) => {
     const [addTask, setAddTask] = useState('')
     
-
-
     const handleAddTask = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         onAddTask(addTask)
