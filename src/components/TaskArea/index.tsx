@@ -1,25 +1,39 @@
 import { TaskItem } from "../TaskItem"
-import emptyIcon from '../assets/empty.svg'
-import { Task } from "../types/Tasks"
+import emptyIcon from '../../assets/empty.svg'
+import { Task } from "../../types/Tasks"
 import { useEffect, useState } from "react"
 
 interface TaskProps {
-    tasks: Task[]
+    tasks: Task[],
+    deleteTaskApp: (deletedTask: Task[]) => void
 }
 
-export const TaskArea = ({ tasks }: TaskProps) => {
+export const TaskArea = ({ tasks, deleteTaskApp }: TaskProps) => {
     const [completedTasks, setCompletedTasks] = useState(0)
     const [createdTasks, setCreatedTasks] = useState(tasks.length)
 
-    function onCompletedTask (completed: number) {
-        let newCompletedTasks = 0
-        if(completed) {
-            newCompletedTasks = completedTasks + 1
-            setCompletedTasks(newCompletedTasks)
+    useEffect(() => {
+        tasksCompleted()
+    }, [])
+    
+    const onDeleteTask = (id: string) => {
+        let tasksWhithOutDeletedTask = tasks.filter(item =>  item.id != id)
+        deleteTaskApp(tasksWhithOutDeletedTask)
+        setCreatedTasks(tasksWhithOutDeletedTask.length)
+    }
+    
+    const onCompletedTask = (completed: boolean) => {
+        let newCompletedTasks = completedTasks
+        if(completed){
+            setCompletedTasks(newCompletedTasks+1)
         } else {
-            completedTasks <= 0 ? newCompletedTasks = 0 : newCompletedTasks = completedTasks - 1
-            setCompletedTasks(newCompletedTasks)
-        }
+            completedTasks < 1 ? setCompletedTasks(0) : setCompletedTasks(newCompletedTasks - 1)
+        }  
+    }
+
+    const tasksCompleted = () => {
+        let newCompletedTasks = tasks.filter(item => item.checked == true)
+        setCompletedTasks(newCompletedTasks.length)
     }
 
     return (
@@ -33,7 +47,7 @@ export const TaskArea = ({ tasks }: TaskProps) => {
                 {tasks.length > 0 &&
                     <>
                         {tasks.map(task => (
-                            <TaskItem key={task.id} task={task} completedTask={onCompletedTask}/>
+                            <TaskItem key={task.id} task={task} completedTask={onCompletedTask} deleteTask={onDeleteTask}/>
                         ))}
                     </>
                 }
