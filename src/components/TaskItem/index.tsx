@@ -1,28 +1,22 @@
 import { Trash } from "phosphor-react"
-import { ChangeEvent, FormEvent, useEffect, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { Task } from "../../types/Tasks"
 
 interface TaskProps {
     task: Task,
-    completedTask: (completedTask: boolean) => void
-    deleteTask: (id: string) => void
+
+    deleteTask: (id: string, checked: boolean) => void
 }
 
-export const TaskItem = ({ task, completedTask, deleteTask }: TaskProps) => {
+export const TaskItem = ({ task, deleteTask }: TaskProps) => {
     const [isChecked, setIsChecked] = useState(task.checked)
-
-    useEffect(() => {
-        completedTask(isChecked)
-    }, [isChecked])
 
     const handleCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
         setIsChecked(e.target.checked)
     }
 
-
     const handleDeleteTask = () => {
-        deleteTask(task.id)
-
+        deleteTask(task.id, isChecked)
     }
 
     return (
