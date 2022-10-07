@@ -3,7 +3,6 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 
 interface TaskProps {
     onAddTask: (newTaskInput: string) => void
-
 }
 
 export const Form = ({onAddTask}: TaskProps) => {
