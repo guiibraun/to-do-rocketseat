@@ -20,7 +20,7 @@ export const TaskArea = ({ tasks, deleteTaskApp }: TaskProps) => {
     useEffect(() => {
         let newTasks = [...tasks].filter(item => item.checked == true)
         setCompletedTasks(newTasks.length)   
-    }, []) // Verifica se existe alguma tarefa na memoria que já está concluida e sinaliza ela como concluida ao carregar
+    }, []) 
 
     const onDeleteTask = (id: string, checked: boolean) => {
         let tasksWhithOutDeletedTask = tasks.filter(item => item.id != id)
@@ -33,9 +33,10 @@ export const TaskArea = ({ tasks, deleteTaskApp }: TaskProps) => {
     }
 
     const onCompletedTask = (checked: boolean, id: string) => {
+        console.log(completedTasks)
         let newChecked = tasks.map(item => {
             if (item.id == id) {
-                item.checked = checked
+                return { ...item, checked: checked }
             }
             return item
         }).filter(item => item.checked === true)
