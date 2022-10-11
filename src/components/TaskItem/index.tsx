@@ -1,5 +1,5 @@
 import { Trash } from "phosphor-react"
-import { ChangeEvent, FormEvent, useEffect, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { Task } from "../../types/Tasks"
 
 interface TaskProps {
