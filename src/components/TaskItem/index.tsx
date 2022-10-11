@@ -11,9 +11,8 @@ interface TaskProps {
 export const TaskItem = ({ task, completedTask, deleteTask }: TaskProps) => {
     const [isChecked, setIsChecked] = useState(task.checked)
 
-
     const handleCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
-        setIsChecked(e.target.checked)
+        setIsChecked(state => state = e.target.checked)
         completedTask(e.target.checked, task.id)
     }
     
