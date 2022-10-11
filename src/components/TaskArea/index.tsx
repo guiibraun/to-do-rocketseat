@@ -11,31 +11,32 @@ interface TaskProps {
 export const TaskArea = ({ tasks, deleteTaskApp }: TaskProps) => {
     const [completedTasks, setCompletedTasks] = useState(0)
 
+    const createdTasks = tasks.length
+
     useEffect(() => {
-        let newTasks = [...tasks].filter(item => item.checked == true)
-        setCompletedTasks(newTasks.length)
+        if (tasks.length > 0){
+            setCompletedTasks(tasks.filter(item => item.checked == true).length)
+        }
     }, [])
 
-    const onDeleteTask = (id: string, checked: boolean) => {
+    const onDeleteTask = (id: string) => {
         let tasksWhithOutDeletedTask = tasks.filter(item => item.id != id)
         deleteTaskApp(tasksWhithOutDeletedTask)
-        /*         if (checked) {
-                    let newCompletedTasks = completedTasks
-                    setCompletedTasks(newCompletedTasks - 1)
-                } */
+        setCompletedTasks(tasksWhithOutDeletedTask.length)          
     }
 
-    const onCompletedTask = (checked: boolean, id: string) => {
+    const onCompletedTask = (checkedItem: boolean, id: string) => {
         let newChecked = tasks.map(item => {
-            if (item.id == id) {
-                return { ...item, checked: checked }
+            if(item.id == id){
+                item.checked = checkedItem
             }
             return item
         }).filter(item => item.checked === true)
-        setCompletedTasks(newChecked.length)
+
+        setCompletedTasks((state) => state = newChecked.length)
     }
 
-    const createdTasks = tasks.length
+    
 
     return (
         <>
